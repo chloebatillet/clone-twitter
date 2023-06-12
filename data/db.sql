@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS "user", "tweet", "hashtag", "tweet_has_hashtag", "tweet_has_tweet";
+DROP TABLE IF EXISTS "user", "tweet", "hashtag", "tweet_has_hashtag", "retweet", "like", "follow";
 
 
 CREATE TABLE "user"
@@ -43,12 +43,44 @@ CONSTRAINT "fk_tweet_has_hashtag_tweet" FOREIGN KEY("tweet_id") REFERENCES "twee
 CONSTRAINT "fk_tweet_has_hashtag_hashtag" FOREIGN KEY("hashtag_id") REFERENCES "hashtag"("id") ON DELETE CASCADE
 );
 
+CREATE TABLE "retweet"
+(
+"tweet_id" INTEGER NOT NULL,
+"user_id" INTEGER NOT NULL,
+PRIMARY KEY ("tweet_id", "user_id"),
+CONSTRAINT "fk_retweet_tweet" FOREIGN KEY("tweet_id") REFERENCES "tweet"("id") ON DELETE CASCADE,
+CONSTRAINT "fk_retweet_user" FOREIGN KEY("user_id") REFERENCES "user"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "like"
+(
+"tweet_id" INTEGER NOT NULL,
+"user_id" INTEGER NOT NULL,
+PRIMARY KEY ("tweet_id", "user_id"),
+CONSTRAINT "fk_like_tweet" FOREIGN KEY("tweet_id") REFERENCES "tweet"("id") ON DELETE CASCADE,
+CONSTRAINT "fk_like_user" FOREIGN KEY("user_id") REFERENCES "user"("id") ON DELETE CASCADE
+);
 
 
 INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('chloe', 'chloe', 'chloe@gmail.com', 'Hello, it is Chloé');
+INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('bob', 'bob', 'bob@gmail.com', 'I am Sponge, Bob the Sponge');
+
 INSERT INTO "tweet" ("content", "user_id") VALUES ('This is my first tweet', 1);
 INSERT INTO "tweet" ("content", "user_id") VALUES ('This is my second tweet', 1);
+INSERT INTO "tweet" ("content", "user_id") VALUES ('I love Patrick', 2);
 INSERT INTO "tweet" ("content", "user_id", "replies_to") VALUES ('This is a reply to my first tweet', 1, 1);
+
 INSERT INTO "hashtag" ("name") VALUES ('hashtag');
+
 INSERT INTO "tweet_has_hashtag" ("tweet_id", "hashtag_id") VALUES (1, 1);
+
+INSERT INTO "retweet" ("tweet_id", "user_id") VALUES (1, 2);
+INSERT INTO "retweet" ("tweet_id", "user_id") VALUES (3, 1);
+
+INSERT INTO "like" ("tweet_id", "user_id") VALUES (3, 1);
+INSERT INTO "like" ("tweet_id", "user_id") VALUES (4, 2);
+
+
+
+
 

@@ -12,3 +12,8 @@ SELECT "user".username, tweet.content FROM "user" JOIN tweet ON "user".id=tweet.
 ```
 SELECT original_tweet.content, tweet.content FROM tweet JOIN tweet original_tweet ON tweet.replies_to=original_tweet.id;
 ```
+
+## Select tweet with the people who retweeted it (same with "like")
+```
+SELECT tweet.id, tweet.content, retweet.user_id, "user".username FROM tweet JOIN retweet ON tweet.id=retweet.tweet_id JOIN "user" ON retweet.user_id="user".id;
+```
