@@ -61,6 +61,13 @@ CONSTRAINT "fk_like_tweet" FOREIGN KEY("tweet_id") REFERENCES "tweet"("id") ON D
 CONSTRAINT "fk_like_user" FOREIGN KEY("user_id") REFERENCES "user"("id") ON DELETE CASCADE
 );
 
+CREATE TABLE "follow" (
+  "user_id" INT NOT NULL,
+  "follower_id" INT NOT NULL,
+  FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE,
+  FOREIGN KEY ("follower_id") REFERENCES "user"("id") ON DELETE CASCADE
+);
+
 
 INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('chloe', 'chloe', 'chloe@gmail.com', 'Hello, it is Chloé');
 INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('bob', 'bob', 'bob@gmail.com', 'I am Sponge, Bob the Sponge');
@@ -79,6 +86,11 @@ INSERT INTO "retweet" ("tweet_id", "user_id") VALUES (3, 1);
 
 INSERT INTO "like" ("tweet_id", "user_id") VALUES (3, 1);
 INSERT INTO "like" ("tweet_id", "user_id") VALUES (4, 2);
+
+INSERT INTO "follow" ("user_id", "follower_id") VALUES (1, 2);
+INSERT INTO "follow" ("user_id", "follower_id") VALUES (2, 1);
+
+
 
 
 

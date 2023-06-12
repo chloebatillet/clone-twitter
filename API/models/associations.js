@@ -1,10 +1,10 @@
-const Hashtag = require('./models/Hashtag');
-const Tweet = require('./models/Tweet');
-const User = require('./models/User');
+const Hashtag = require('./Hashtag');
+const Tweet = require('./Tweet');
+const User = require('./User');
 
-const Retweet = require('./models/Retweet');
-const Like = require('./models/Like');
-const Follow = require('./models/Follow');
+const Retweet = require('./Retweet');
+const Like = require('./Like');
+const Follow = require('./Follow');
 
 
 /**
@@ -85,11 +85,11 @@ User.belongsToMany(Tweet, {
 });
 
 
-async function test() {
+/* async function test() {
     const res = await User.findAll({
         include: ['followers', 'followings']
     });
     console.log(res);
 }
 
-test();
+test(); */

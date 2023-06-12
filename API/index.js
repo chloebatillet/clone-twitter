@@ -13,7 +13,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use( bodyParser.none() );
- 
+
+require('./models/associations');
  
 // app.use(router);
 app.get('/', (req, res) => {
