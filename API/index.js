@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const multer = require('multer');
 const bodyParser = multer();
+const router = require('./router')
  
  
 app.use(express.json());
@@ -16,10 +17,10 @@ app.use( bodyParser.none() );
 
 require('./models/associations');
  
-// app.use(router);
-app.get('/', (req, res) => {
+app.use(router);
+/* app.get('/', (req, res) => {
 res.send('Hello World!');
-})
+}) */
  
 // middleware 404
 app.use((req, res) => {

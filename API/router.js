@@ -1,9 +1,10 @@
-const express = require('express');
-const router = express.Router();
+const { Router } = require('express');
+const router = Router()
 
+const tweetController = require('./controllers/tweetController.js')
 
 router.route('/tweets')
-    .get()
-    .post()
+    .get(tweetController.getAll)
+    /* .post(tweetController.create) */
 
 module.exports = router;
