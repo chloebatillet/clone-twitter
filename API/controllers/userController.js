@@ -11,6 +11,9 @@ module.exports = {
                 ['created_at', 'DESC']
             ], */
             attributes: {
+                // on exclue les infos personnelles
+                // il faudra aussi les exclure de 'followings' et 'followers'
+                exclude: ['email', 'password'],
                 include: [
                     [sequelize.literal('(SELECT COUNT(*) FROM "follow" WHERE "follow"."follower_id" = "User"."id")'),
                         'number_following'
@@ -39,6 +42,9 @@ module.exports = {
                 ]
             }],
             attributes: {
+                // on exclue les infos personnelles
+                // il faudra aussi les exclure de 'followings' et 'followers'
+                exclude: ['email', 'password'],
                 include: [
                     [sequelize.literal('(SELECT COUNT(*) FROM "follow" WHERE "follow"."follower_id" = "User"."id")'),
                         'number_following'
