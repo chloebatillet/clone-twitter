@@ -72,6 +72,8 @@ CREATE TABLE "follow" (
 INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('chloe', 'chloe', 'chloe@gmail.com', 'Hello, it is Chloé');
 INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('bob', 'bob', 'bob@gmail.com', 'I am Sponge, Bob the Sponge');
 INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('sc00by', 'sc00by', 'sc00by@gmail.com', 'Scooby Snacks <3');
+INSERT INTO "user" ("username", "password", "email", "bio") VALUES ('elonmusk', 'elonmusk', 'elonmusk@gmail.com', 'vrooooom');
+
 
 
 INSERT INTO "tweet" ("content", "user_id") VALUES ('This is my first tweet', 1);
@@ -94,6 +96,8 @@ INSERT INTO "follow" ("user_id", "follower_id") VALUES (2, 1);
 INSERT INTO "follow" ("user_id", "follower_id") VALUES (1, 3);
 INSERT INTO "follow" ("user_id", "follower_id") VALUES (3, 1);
 INSERT INTO "follow" ("user_id", "follower_id") VALUES (2, 3);
+INSERT INTO "follow" ("user_id", "follower_id") VALUES (1, 4);
+
 
 
 
