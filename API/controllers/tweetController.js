@@ -6,7 +6,7 @@ module.exports = {
         // à modifier pour récupérer tous les tweets des personnes que je suis : 
         // - 
         const result = await Tweet.findAll({
-            include: ['retweet', 'like'],
+            include: ['retweet', 'like', 'user', 'replies'],
             order: [
                 ['created_at', 'DESC']
             ],
@@ -28,10 +28,7 @@ module.exports = {
         const id = Number(req.params.id);
 
         const result = await Tweet.findByPk(id, {
-            include: ['retweet', 'like'],
-            order: [
-                ['created_at', 'DESC']
-            ],
+            include: ['retweet', 'like', 'user', 'replies'],
             attributes: {
                 include: [
                     [sequelize.literal('(SELECT COUNT(*) FROM "like" WHERE "like"."tweet_id" = "Tweet"."id")'),

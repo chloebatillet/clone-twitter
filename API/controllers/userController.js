@@ -1,8 +1,10 @@
 const User = require('../models/User');
+const Tweet = require('../models/Tweet');
+
 const sequelize = require('../database')
 
 module.exports = {
-    async getAll(_, res) {
+    async getAllProfiles(_, res) {
         const result = await User.findAll({
             include: ['retweeted', 'liked', 'followings', 'followers'],
             /*order: [
@@ -11,36 +13,42 @@ module.exports = {
             attributes: {
                 include: [
                     [sequelize.literal('(SELECT COUNT(*) FROM "follow" WHERE "follow"."follower_id" = "User"."id")'),
-                    'number_following'
+                        'number_following'
                     ],
                     [sequelize.literal('(SELECT COUNT(*) FROM "follow" WHERE "follow"."user_id" = "User"."id")'),
-                    'number_follower'
-                    ]                    
+                        'number_follower'
+                    ]
                 ]
             }
         })
         res.json(result)
     },
 
-    /* async getOne(req, res) {
+    async getOneProfil(req, res) {
         const id = Number(req.params.id);
 
-        const result = await Tweet.findByPk(id, {
-            include: ['retweet', 'like'],
-            order: [
-                ['created_at', 'DESC']
-            ],
+        const result = await User.findByPk(id, {
+            include: ['retweeted', 'liked', 'followings', 'followers',
+            // on ordonnera aussi 'liked' et 'retweeted' mais pour le moment ils n'y pas de timestamp sur leur table.
+            {
+                model: Tweet,
+                as: 'tweets',
+                separate: true,
+                order: [
+                    ['created_at', 'DESC']
+                ]
+            }],
             attributes: {
                 include: [
-                    [sequelize.literal('(SELECT COUNT(*) FROM "like" WHERE "like"."tweet_id" = "Tweet"."id")'),
-                    'number_like'
+                    [sequelize.literal('(SELECT COUNT(*) FROM "follow" WHERE "follow"."follower_id" = "User"."id")'),
+                        'number_following'
                     ],
-                    [sequelize.literal('(SELECT COUNT(*) FROM "retweet" WHERE "retweet"."tweet_id" = "Tweet"."id")'),
-                    'number_retweet'
+                    [sequelize.literal('(SELECT COUNT(*) FROM "follow" WHERE "follow"."user_id" = "User"."id")'),
+                        'number_follower'
                     ]
                 ]
             }
         })
         res.json(result)
-    } */
+    }
 }

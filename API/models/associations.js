@@ -13,16 +13,19 @@ const Follow = require('./Follow');
 
 // user <--> tweet
 User.hasMany(Tweet, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+    as: 'tweets'
 });
 Tweet.belongsTo(User, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+    as: 'user'
 });
 
 
 // tweet <--> reply (dans la table tweet)
 Tweet.hasMany(Tweet, {
-    foreignKey: 'repliesTo'
+    foreignKey: 'repliesTo',
+    as: 'replies'
 });
 Tweet.belongsTo(Tweet, {
     foreignKey: 'repliesTo'

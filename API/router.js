@@ -9,8 +9,13 @@ router.route('/tweets')
     .get(tweetController.getAll)
     /* .post(tweetController.create) */
 
-router.route('/users')
-    .get(userController.getAll)
+router.route('/tweets/:id')
+    .get(tweetController.getOne)
 
-    
+router.route('/users')
+    .get(userController.getAllProfiles)
+
+router.route('/users/:id')
+    .get(userController.getOneProfil)
+
 module.exports = router;

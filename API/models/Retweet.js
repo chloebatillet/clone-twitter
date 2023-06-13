@@ -19,6 +19,7 @@ Retweet.init({
     sequelize,
     tableName: 'retweet',
     modelName: 'Retweet',
+    // ici il faudra accepter les timestamps
     timestamps: false
 });
 

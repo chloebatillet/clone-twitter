@@ -19,6 +19,7 @@ Like.init({
     sequelize,
     tableName: 'like',
     modelName: 'Like',
+    // ici il faudra accepter les timestamps
     timestamps: false
 });
 
