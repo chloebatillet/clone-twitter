@@ -1,13 +1,11 @@
-const Tweet = require('../models/Tweet');
+const User = require('../models/User');
 const sequelize = require('../database')
 
 module.exports = {
     async getAll(_, res) {
-        // à modifier pour récupérer tous les tweets des personnes que je suis : 
-        // - 
-        const result = await Tweet.findAll({
-            include: ['retweet', 'like'],
-            order: [
+        const result = await User.findAll({
+            include: ['retweeted', 'liked', 'followings', 'followers'],
+            /*order: [
                 ['created_at', 'DESC']
             ],
             attributes: {
@@ -19,12 +17,12 @@ module.exports = {
                     'number_retweet'
                     ]
                 ]
-            }
+            } */
         })
         res.json(result)
     },
 
-    async getOne(req, res) {
+    /* async getOne(req, res) {
         const id = Number(req.params.id);
 
         const result = await Tweet.findByPk(id, {
@@ -44,5 +42,5 @@ module.exports = {
             }
         })
         res.json(result)
-    }
+    } */
 }

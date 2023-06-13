@@ -53,7 +53,7 @@ User.belongsToMany(User, {
     through: Follow,
     as: 'followings',
     foreignKey: 'userId',
-    otherKey: 'userId'
+    otherKey: 'followerId'
 });
 
 // tweet <--> hashtag
